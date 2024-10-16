@@ -8,12 +8,47 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/gameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="52dp"
+        android:text="Country Game"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/aboutBtn"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="About"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameBtn" />
+
+    <Button
+        android:id="@+id/gameBtn"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:text="New Country Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="411dp"
+        android:layout_height="329dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutBtn"
+        app:layout_constraintVertical_bias="1.0">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
