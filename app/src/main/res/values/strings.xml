@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Flag Game</string>
+
+    <string-array name="country_array">
+        <item>Algeria</item>
+        <item>Australia</item>
+        <item>Belgium</item>
+        <item>Brazil</item>
+        <item>Canada</item>
+        <item>Colombia</item>
+        <item>Croatia</item>
+        <item>Denmark</item>
+        <item>Egypt</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>Germany</item>
+        <item>Greece</item>
+        <item>Portugal</item>
+        <item>Singapore</item>
+        <item>Spain</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Turkey</item>
+        <item>Ukraine</item>
+        <item>Zimbabwe</item>
+    </string-array>
 </resources>

@@ -24,7 +24,12 @@ public class MainActivity extends AppCompatActivity {
         Button gameBtn = (Button) findViewById(R.id.gameBtn);
         Button aboutBtn = (Button) findViewById(R.id.aboutBtn);
 
-
+        gameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, NewGameActivity.class));
+            }
+        });
 
         aboutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

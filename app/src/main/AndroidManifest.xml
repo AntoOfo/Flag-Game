@@ -13,6 +13,12 @@
         android:theme="@style/Theme.FlagGame"
         tools:targetApi="31">
         <activity
+            android:name=".GuessCountryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewGameActivity"
+            android:exported="false" />
+        <activity
             android:name=".AboutActivity"
             android:exported="false" />
         <activity
