@@ -83,7 +83,7 @@ public class GuessHintsActivity extends AppCompatActivity {
                     String userInput = guessInput.getText().toString().trim(); // .trim to remove unneeded space
                     if (!userInput.isEmpty()) {
                         char guessedLetter = userInput.charAt(0);
-                        updateDash(guessedLetter);  // check guess
+                        checkDashes(guessedLetter);  // check guess
                     }
                 }
             }
@@ -115,9 +115,46 @@ public class GuessHintsActivity extends AppCompatActivity {
 
         private void createDashes() {
 
+            dashes = new char[rightCountry.length()];
+
+            int i = 0;
+            while (i < dashes.length) {
+                if (rightCountry.charAt(i) == ' ') {
+                    dashes[i] = ' ';   // leave the space as is
+                } else {
+                    dashes[i] = '-';
+                }
+                i++;
+            }
+            updateDash();   // update textview for dashes
         }
 
         private void updateDash() {
+            countryDashes.setText(new String(dashes));
+        }
 
+        private void checkDashes(char guessedChar) {
+            guessedChar = Character.toUpperCase(guessedChar);
+            boolean found = false;
+
+            int i = 0;
+            while (i < rightCountry.length()) {
+                if (Character.toUpperCase(rightCountry.charAt(i)) == guessedChar) {
+                    dashes[i] = rightCountry.charAt(i);  // replace dash with right letter
+                    found = true;
+                }
+                i++;
+            }
+
+            if (found) {
+                updateDash();    // update if character is found
+            }
+
+            guessInput.setText("");
+
+            if (new String(dashes).equals(rightCountry)) {
+                submitButton.setText("Next");
+                isNext = true;  // will load new flag on next click
+            }
         }
     }
