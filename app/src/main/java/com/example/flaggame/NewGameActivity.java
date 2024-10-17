@@ -43,5 +43,12 @@ public class NewGameActivity extends AppCompatActivity {
                 startActivity(new Intent(NewGameActivity.this, GuessFlagActivity.class));
             }
         });
+
+        advancedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NewGameActivity.this, AdvancedLevelActivity.class));
+            }
+        });
         }
     }
