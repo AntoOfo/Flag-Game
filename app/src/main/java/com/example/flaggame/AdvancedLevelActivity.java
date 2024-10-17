@@ -34,6 +34,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
     private int tries = 0;
     private int maxTries = 3;
     private int score = 0;
+    private boolean isNextRound = false;   // tracks if we're waiting for next round
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,11 @@ public class AdvancedLevelActivity extends AppCompatActivity {
 
     private void checkAnswers() {
 
+        if (isNextRound) {
+            resetNextRound();
+            return;
+        }
+
         if (flagOneName.getText().toString().trim().isEmpty() ||
             flagTwoName.getText().toString().trim().isEmpty() ||
             flagThreeName.getText().toString().trim().isEmpty()) {
@@ -162,38 +168,24 @@ public class AdvancedLevelActivity extends AppCompatActivity {
             allRight = false;
         }
 
-        tries++;
         score += rightAnswers;
         scoreUpdate();
 
-        btnSubmit.setEnabled(false);
 
-        if (allRight) {
-            feedbackTextView.setText("CORRECT!");
+        if (rightAnswers == 3) {
+            feedbackTextView.setText("Correct!");
             feedbackTextView.setTextColor(Color.GREEN);
-            btnSubmit.setText("Next");
-            btnSubmit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    resetNextRound();
-                }
-            });
-        } else if (tries >= maxTries) {
-            feedbackTextView.setText("WRONG! Correct answers: " + rightCountryNames[0] + ", " + rightCountryNames[1] + ", " + rightCountryNames[2]);
-            feedbackTextView.setTextColor(Color.RED);
-            btnSubmit.setText("Next");
-            btnSubmit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    resetNextRound();
-                }
-            });
-            score += rightAnswers;
-            scoreUpdate();
+        } else if (rightAnswers > 0) {
+            feedbackTextView.setText("You got " + rightAnswers + " correct!");
+            feedbackTextView.setTextColor(Color.YELLOW);
         } else {
-            feedbackTextView.setText("You got " + rightAnswers + " correct! Attempts left: " + (maxTries - tries));
+            feedbackTextView.setText("Wrong! All answers are incorrect.");
             feedbackTextView.setTextColor(Color.RED);
         }
+
+        // Set the button text to "Next" for the next round
+        btnSubmit.setText("Next");
+        isNextRound = true;
     }
 
     private void resetNextRound() {
@@ -215,7 +207,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
 
         showRandomFlags();
         btnSubmit.setText("Submit");
-        btnSubmit.setEnabled(true);
+        isNextRound = false;
     }
 
     private void scoreUpdate() {
