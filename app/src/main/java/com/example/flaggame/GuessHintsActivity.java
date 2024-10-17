@@ -2,6 +2,7 @@ package com.example.flaggame;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,11 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +21,7 @@ public class GuessHintsActivity extends AppCompatActivity {
 
     private ImageView flagImage;
     private TextView countryDashes;
+    private TextView hintResultTxt;
     private Button submitButton;
     private EditText guessInput;
 
@@ -32,6 +30,8 @@ public class GuessHintsActivity extends AppCompatActivity {
     private String rightCountry;
     private char[] dashes;
     private boolean isNext;
+    private int wrongGuess;
+    private final int maxWrongGuess = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class GuessHintsActivity extends AppCompatActivity {
         flagImage = findViewById(R.id.imageView2);
         countryDashes = findViewById(R.id.countryDashes);
         guessInput = findViewById(R.id.guessInput);
+        hintResultTxt = findViewById(R.id.hintResultTxt);
         submitButton = findViewById(R.id.submitButton);
 
         flagBitmap = new HashMap<>();
@@ -90,71 +91,83 @@ public class GuessHintsActivity extends AppCompatActivity {
         });
 
 
-        }
+    }
 
-        private Bitmap loadBitmap(int i) {
-            return BitmapFactory.decodeResource(getResources(), i);
-        }
+    private Bitmap loadBitmap(int i) {
+        return BitmapFactory.decodeResource(getResources(), i);
+    }
 
-        // random flag and dashes with it
-        private void showRandomFlag() {
+    // random flag and dashes with it
+    private void showRandomFlag() {
 
-            Random random = new Random();
-            Bitmap randomFlag = flagList.get(random.nextInt(flagList.size()));
+        Random random = new Random();
+        Bitmap randomFlag = flagList.get(random.nextInt(flagList.size()));
 
-            // set image to random flag
-            flagImage.setImageBitmap(randomFlag);
+        // set image to random flag
+        flagImage.setImageBitmap(randomFlag);
 
-            rightCountry = flagBitmap.get(randomFlag);
-            createDashes();  // create dashes based on right country
+        rightCountry = flagBitmap.get(randomFlag);
+        createDashes();  // create dashes based on right country
 
-            guessInput.setText("");
-            submitButton.setText("Submit");
-            isNext = false;
-        }
+        guessInput.setText("");
+        submitButton.setText("Submit");
+        isNext = false;
+    }
 
-        private void createDashes() {
+    private void createDashes() {
 
-            dashes = new char[rightCountry.length()];
+        dashes = new char[rightCountry.length()];
 
-            int i = 0;
-            while (i < dashes.length) {
-                if (rightCountry.charAt(i) == ' ') {
-                    dashes[i] = ' ';   // leave the space as is
-                } else {
-                    dashes[i] = '-';
-                }
-                i++;
+        int i = 0;
+        while (i < dashes.length) {
+            if (rightCountry.charAt(i) == ' ') {
+                dashes[i] = ' ';   // leave the space as is
+            } else {
+                dashes[i] = '-';
             }
-            updateDash();   // update textview for dashes
+            i++;
+        }
+        updateDash();   // update textview for dashes
+    }
+
+    private void updateDash() {
+        countryDashes.setText(new String(dashes));
+    }
+
+    private void checkDashes(char guessedChar) {
+        guessedChar = Character.toUpperCase(guessedChar);
+        boolean found = false;
+
+        int i = 0;
+        while (i < rightCountry.length()) {
+            if (Character.toUpperCase(rightCountry.charAt(i)) == guessedChar) {
+                dashes[i] = rightCountry.charAt(i);  // replace dash with right letter
+                found = true;
+            }
+            i++;
         }
 
-        private void updateDash() {
-            countryDashes.setText(new String(dashes));
-        }
-
-        private void checkDashes(char guessedChar) {
-            guessedChar = Character.toUpperCase(guessedChar);
-            boolean found = false;
-
-            int i = 0;
-            while (i < rightCountry.length()) {
-                if (Character.toUpperCase(rightCountry.charAt(i)) == guessedChar) {
-                    dashes[i] = rightCountry.charAt(i);  // replace dash with right letter
-                    found = true;
-                }
-                i++;
-            }
-
-            if (found) {
-                updateDash();    // update if character is found
-            }
-
-            guessInput.setText("");
+        if (found) {
+            updateDash();    // update if character is found
 
             if (new String(dashes).equals(rightCountry)) {
                 submitButton.setText("Next");
                 isNext = true;  // will load new flag on next click
+                hintResultTxt.setText("Correct!");
+                hintResultTxt.setTextColor(Color.GREEN);
+            }
+        } else {
+            wrongGuess = wrongGuess + 1;
+
+            if (wrongGuess >= maxWrongGuess) {
+                hintResultTxt.setText("Wrong! The right country was: " + rightCountry);
+                hintResultTxt.setTextColor(Color.RED);
+                countryDashes.setText(rightCountry);
+                submitButton.setText("Next");
+                isNext = true;
             }
         }
+
+        guessInput.setText("");
     }
+}
