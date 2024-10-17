@@ -2,13 +2,11 @@ package com.example.flaggame;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,34 +15,34 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class GuessCountryActivity extends AppCompatActivity {
+public class GuessHintsActivity extends AppCompatActivity {
 
     private ImageView flagImage;
+    private TextView countryDashes;
+    private Button submitButton;
+    private EditText guessInput;
+
     private HashMap<Bitmap, String> flagBitmap;
     private List<Bitmap> flagList;
     private String rightCountry;
-    private TextView resultText;
-    private Button submitBtn;
+    private char[] dashes;
     private boolean isNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guess_country);
+        setContentView(R.layout.activity_guess_hints);
 
-        flagImage = findViewById(R.id.imageView);
-        submitBtn = findViewById(R.id.submitBtn);
-        Spinner countriesSpinner = findViewById(R.id.countriesSpinner);
-        resultText = findViewById(R.id.resultText);
+        flagImage = findViewById(R.id.imageView2);
+        countryDashes = findViewById(R.id.countryDashes);
+        guessInput = findViewById(R.id.guessInput);
+        submitButton = findViewById(R.id.submitButton);
 
-        // initialise hashmap
         flagBitmap = new HashMap<>();
         // load bitmaps and store them
         flagBitmap.put(loadBitmap(R.drawable.algeria), "Algeria");
@@ -69,64 +67,57 @@ public class GuessCountryActivity extends AppCompatActivity {
         flagBitmap.put(loadBitmap(R.drawable.ukraine), "Ukraine");
         flagBitmap.put(loadBitmap(R.drawable.zimbabwe), "Zimbabwe");
 
-        // list of bitmaps to randomise
+        // list of bitmaps for randomisation
         flagList = new ArrayList<>(flagBitmap.keySet());
 
-        // show random flag when activity loads
         showRandomFlag();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.
-                createFromResource(this, R.array.country_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        countriesSpinner.setAdapter(adapter);
-
-        submitBtn.setOnClickListener(new View.OnClickListener() {
+        // submit/next button
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isNext) {
                     showRandomFlag();
-                    isNext = false;  // reset to submit
+                    isNext = false;
                 } else {
-                    String chosenCountry = countriesSpinner.getSelectedItem().toString();
-                    checkAnswer(chosenCountry);
+                    String userInput = guessInput.getText().toString().trim(); // .trim to remove unneeded space
+                    if (!userInput.isEmpty()) {
+                        char guessedLetter = userInput.charAt(0);
+                        updateDash(guessedLetter);  // check guess
+                    }
                 }
             }
         });
 
+
         }
 
         private Bitmap loadBitmap(int i) {
-            // loads image as bitmap with BitmapFactory
             return BitmapFactory.decodeResource(getResources(), i);
         }
 
+        // random flag and dashes with it
         private void showRandomFlag() {
-        // chooses random bitmap from list
-        Random random = new Random();
-        Bitmap randomFlag = flagList.get(random.nextInt(flagList.size()));
 
-        flagImage.setImageBitmap(randomFlag);   // sets imageview to random flag
+            Random random = new Random();
+            Bitmap randomFlag = flagList.get(random.nextInt(flagList.size()));
 
-        rightCountry = flagBitmap.get(randomFlag);
+            // set image to random flag
+            flagImage.setImageBitmap(randomFlag);
 
-        // resets result msg
-        resultText.setText("");
-        submitBtn.setText("Submit");
-        isNext = false;
+            rightCountry = flagBitmap.get(randomFlag);
+            createDashes();  // create dashes based on right country
+
+            guessInput.setText("");
+            submitButton.setText("Submit");
+            isNext = false;
         }
 
-        private void checkAnswer(String chosenCountry) {
+        private void createDashes() {
 
-        if (chosenCountry.equals(rightCountry)) {
-            resultText.setText("Correct!");
-            resultText.setTextColor(Color.GREEN);
-        } else {
-            resultText.setText("Wrong! The right answer is: " + rightCountry);
-            resultText.setTextColor(Color.RED);
         }
 
-        submitBtn.setText("Next");
-        isNext = true;
+        private void updateDash() {
+
         }
     }

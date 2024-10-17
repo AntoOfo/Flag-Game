@@ -29,5 +29,12 @@ public class NewGameActivity extends AppCompatActivity {
                 startActivity(new Intent(NewGameActivity.this, GuessCountryActivity.class));
             }
         });
+
+        hintsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NewGameActivity.this, GuessHintsActivity.class));
+            }
+        });
         }
     }
