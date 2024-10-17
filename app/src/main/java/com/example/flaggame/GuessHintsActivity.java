@@ -79,6 +79,7 @@ public class GuessHintsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (isNext) {
                     showRandomFlag();
+                    hintResultTxt.setText("");
                     isNext = false;
                 } else {
                     String userInput = guessInput.getText().toString().trim(); // .trim to remove unneeded space
