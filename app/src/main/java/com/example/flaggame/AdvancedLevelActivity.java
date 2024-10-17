@@ -120,6 +120,15 @@ public class AdvancedLevelActivity extends AppCompatActivity {
     }
 
     private void checkAnswers() {
+
+        if (flagOneName.getText().toString().trim().isEmpty() ||
+            flagTwoName.getText().toString().trim().isEmpty() ||
+            flagThreeName.getText().toString().trim().isEmpty()) {
+            feedbackTextView.setText("Please enter answers for all flags.");
+            feedbackTextView.setTextColor(Color.RED);
+            return;
+        }
+
         boolean allRight = true;
         int rightAnswers = 0;
 
@@ -154,13 +163,15 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         }
 
         tries++;
+        score += rightAnswers;
+        scoreUpdate();
+
+        btnSubmit.setEnabled(false);
 
         if (allRight) {
             feedbackTextView.setText("CORRECT!");
             feedbackTextView.setTextColor(Color.GREEN);
             btnSubmit.setText("Next");
-            score += 3;  // up score by 3 if all correct
-            scoreUpdate();
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -180,7 +191,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
             score += rightAnswers;
             scoreUpdate();
         } else {
-            feedbackTextView.setText("Wrong! Attempts left: " + (maxTries - tries));
+            feedbackTextView.setText("You got " + rightAnswers + " correct! Attempts left: " + (maxTries - tries));
             feedbackTextView.setTextColor(Color.RED);
         }
     }
@@ -189,7 +200,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
 
         flagOneName.setEnabled(true);
         flagOneName.setText("");
-        flagOneName.setBackgroundColor(Color.TRANSPARENT);
+        flagOneName.setBackgroundColor(Color.TRANSPARENT);  // resets bg color of textbox
 
         flagTwoName.setEnabled(true);
         flagTwoName.setText("");
@@ -204,6 +215,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
 
         showRandomFlags();
         btnSubmit.setText("Submit");
+        btnSubmit.setEnabled(true);
     }
 
     private void scoreUpdate() {
