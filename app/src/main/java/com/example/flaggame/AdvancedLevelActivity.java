@@ -1,5 +1,6 @@
 package com.example.flaggame;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -50,6 +51,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         scoreTextView = findViewById(R.id.scoreTextView);
         feedbackTextView = findViewById(R.id.feedbackTextView);
+        ImageView backBtn = (ImageView) findViewById(R.id.backImgView5);
 
         // initialises score
         scoreUpdate();
@@ -82,6 +84,13 @@ public class AdvancedLevelActivity extends AppCompatActivity {
 
 
         showRandomFlags();
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdvancedLevelActivity.this, NewGameActivity.class));
+            }
+        });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
