@@ -11,19 +11,21 @@
         android:layout_width="377dp"
         android:layout_height="163dp"
         android:text="I confirm that I understand what plagiarism is and have read the University’s policy on plagiarism and understand the definition of plagiarism. The work that I have submitted is entirely my own. Any work from other authors is duly referenced and acknowledged. I understand that I may face sanctions in accordance with the policies and procedures of the University."
+        android:textColor="#D7D9E6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameText"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.159" />
 
     <TextView
         android:id="@+id/idText"
         android:layout_width="154dp"
         android:layout_height="23dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="StudentID: B00858076"
+        android:textColor="#D7D9E6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="StudentName: Antonio Ofodile"
+        android:textColor="#D7D9E6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idText" />

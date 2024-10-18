@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#222A2F"
     tools:context=".NewGameActivity">
 
     <TextView
@@ -12,50 +13,91 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:fontFamily="sans-serif-black"
         android:text="Country Game"
+        android:textColor="#D7D9E6"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/guessCountryBtn"
+        android:id="@+id/advancedBtn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="Guess the Country"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#455BD9"
+        android:text="Advanced Level"
+        android:textColor="#D7D9E6"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/hintsBtn" />
 
     <Button
         android:id="@+id/guessFlagBtn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#455BD9"
         android:text="Guess the Flag"
+        android:textColor="#D7D9E6"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guessCountryBtn" />
+
+    <Button
+        android:id="@+id/guessCountryBtn"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:backgroundTint="#455BD9"
+        android:text="Guess the Country"
+        android:textColor="#D7D9E6"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <Button
         android:id="@+id/hintsBtn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="#455BD9"
         android:text="Guess-Hints"
+        android:textColor="#D7D9E6"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guessFlagBtn" />
 
-    <Button
-        android:id="@+id/advancedBtn"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Advanced Level"
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="24dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hintsBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/backImgView"
+        android:layout_width="50dp"
+        android:layout_height="47dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/advancedBtn"
+        app:layout_constraintVertical_bias="0.833"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

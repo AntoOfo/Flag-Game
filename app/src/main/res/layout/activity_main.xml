@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#222A2F"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,10 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:fontFamily="sans-serif-black"
         android:text="Country Game"
+        android:textColor="#D7D9E6"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +26,10 @@
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:backgroundTint="#455BD9"
         android:text="About"
+        android:textColor="#D7D9E6"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameBtn" />
@@ -33,22 +38,36 @@
         android:id="@+id/gameBtn"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="112dp"
+        android:backgroundTint="#455BD9"
         android:text="New Country Game"
+        android:textColor="#D7D9E6"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="411dp"
-        android:layout_height="329dp"
+        android:layout_width="414dp"
+        android:layout_height="274dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutBtn"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent">
 
     </FrameLayout>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="24dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

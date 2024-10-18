@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class NewGameActivity extends AppCompatActivity {
         Button guessFlagBtn = (Button) findViewById(R.id.guessFlagBtn);
         Button hintsBtn = (Button) findViewById(R.id.hintsBtn);
         Button advancedBtn = (Button) findViewById(R.id.advancedBtn);
+        ImageView backBtn = (ImageView) findViewById(R.id.backImgView);
 
         guessCountryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +50,13 @@ public class NewGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(NewGameActivity.this, AdvancedLevelActivity.class));
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NewGameActivity.this, MainActivity.class));
             }
         });
         }
