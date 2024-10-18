@@ -1,5 +1,6 @@
 package com.example.flaggame;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -43,6 +44,7 @@ public class GuessHintsActivity extends AppCompatActivity {
         guessInput = findViewById(R.id.guessInput);
         hintResultTxt = findViewById(R.id.hintResultTxt);
         submitButton = findViewById(R.id.submitButton);
+        ImageView backBtn = (ImageView) findViewById(R.id.backImgView4);
 
         flagBitmap = new HashMap<>();
         // load bitmaps and store them
@@ -73,6 +75,12 @@ public class GuessHintsActivity extends AppCompatActivity {
 
         showRandomFlag();
 
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GuessHintsActivity.this, NewGameActivity.class));
+            }
+        });
         // submit/next button
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override

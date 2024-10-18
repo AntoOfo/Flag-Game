@@ -1,5 +1,6 @@
 package com.example.flaggame;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -43,6 +44,7 @@ public class GuessCountryActivity extends AppCompatActivity {
         submitBtn = findViewById(R.id.submitBtn);
         Spinner countriesSpinner = findViewById(R.id.countriesSpinner);
         resultText = findViewById(R.id.resultText);
+        ImageView backBtn = (ImageView) findViewById(R.id.backImgView2);
 
         // initialise hashmap
         flagBitmap = new HashMap<>();
@@ -80,6 +82,13 @@ public class GuessCountryActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         countriesSpinner.setAdapter(adapter);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GuessCountryActivity.this, NewGameActivity.class));
+            }
+        });
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

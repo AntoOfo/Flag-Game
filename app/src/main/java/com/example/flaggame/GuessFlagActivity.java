@@ -1,5 +1,6 @@
 package com.example.flaggame;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -43,6 +44,7 @@ public class GuessFlagActivity extends AppCompatActivity {
         countryName = findViewById(R.id.countryName);
         resultTxt = findViewById(R.id.resultTxt);
         nextBtn = findViewById(R.id.nextbtn);
+        ImageView backBtn = (ImageView) findViewById(R.id.backImgView3);
 
         nextBtn.setVisibility(TextView.GONE);  // hide the button initially
 
@@ -74,6 +76,13 @@ public class GuessFlagActivity extends AppCompatActivity {
         flagList = new ArrayList<>(flagBitmap.keySet());
 
         showRandomFlags();
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GuessFlagActivity.this, NewGameActivity.class));
+            }
+        });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
