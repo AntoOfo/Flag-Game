@@ -27,6 +27,7 @@ import java.util.Random;
 
 public class GuessCountryActivity extends AppCompatActivity {
 
+    // xml elements
     private ImageView flagImage;
     private HashMap<Bitmap, String> flagBitmap;
     private List<Bitmap> flagList;
@@ -77,10 +78,12 @@ public class GuessCountryActivity extends AppCompatActivity {
         // show random flag when activity loads
         showRandomFlag();
 
+        // adapter for the spinner using string array of country names
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.
                 createFromResource(this, R.array.country_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        // sets adapter for spinner
         countriesSpinner.setAdapter(adapter);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +113,7 @@ public class GuessCountryActivity extends AppCompatActivity {
             return BitmapFactory.decodeResource(getResources(), i);
         }
 
+        // shows random flag from flag list
         private void showRandomFlag() {
         // chooses random bitmap from list
         Random random = new Random();
@@ -125,8 +129,10 @@ public class GuessCountryActivity extends AppCompatActivity {
         isNext = false;
         }
 
+        // checks if chosen country is the right answer
         private void checkAnswer(String chosenCountry) {
 
+        // if chosen country is the correct one, change text/color
         if (chosenCountry.equals(rightCountry)) {
             resultText.setText("Correct!");
             resultText.setTextColor(Color.GREEN);

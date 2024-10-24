@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Flag Game</string>
+    <string name="first_flag">First Flag</string>
+    <string name="second_flag">Second Flag</string>
+    <string name="country_one">Country One:</string>
+    <string name="country_two">Country Two:</string>
+    <string name="third_flag">Third Flag</string>
+    <string name="country_three">Country Three:</string>
+    <string name="submit">Submit</string>
+    <string name="score_0">Score: 0</string>
+    <string name="back">Back</string>
 
     <string-array name="country_array">
         <item>Algeria</item>

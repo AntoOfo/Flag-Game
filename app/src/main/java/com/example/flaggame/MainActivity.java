@@ -24,13 +24,15 @@ public class MainActivity extends AppCompatActivity {
         Button gameBtn = (Button) findViewById(R.id.gameBtn);
         Button aboutBtn = (Button) findViewById(R.id.aboutBtn);
 
+        // onClickListener for game button
         gameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, NewGameActivity.class));
+                startActivity(new Intent(MainActivity.this, NewGameActivity.class));  // starts new activity
             }
         });
 
+        // onClickListener for about button
         aboutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         });
         }
 
+        // loads fragment into the layout created
         private void loadFragment(Fragment fragment) {
 
             FragmentManager fm = getSupportFragmentManager();

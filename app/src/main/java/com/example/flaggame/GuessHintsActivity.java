@@ -20,17 +20,19 @@ import java.util.Random;
 
 public class GuessHintsActivity extends AppCompatActivity {
 
+    // xml initialising
     private ImageView flagImage;
     private TextView countryDashes;
     private TextView hintResultTxt;
     private Button submitButton;
     private EditText guessInput;
 
-    private HashMap<Bitmap, String> flagBitmap;
-    private List<Bitmap> flagList;
-    private String rightCountry;
-    private char[] dashes;
-    private boolean isNext;
+    // game data initialising
+    private HashMap<Bitmap, String> flagBitmap;  // links flag bitmaps with country names
+    private List<Bitmap> flagList;   // lists all flag bitmaps for randomising
+    private String rightCountry;   // stores right country for flag
+    private char[] dashes;  // array for dashes
+    private boolean isNext;  // for when to load new flag or submit
     private int wrongGuess;
     private final int maxWrongGuess = 3;
 
@@ -39,6 +41,7 @@ public class GuessHintsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guess_hints);
 
+        // xml elements
         flagImage = findViewById(R.id.imageView2);
         countryDashes = findViewById(R.id.countryDashes);
         guessInput = findViewById(R.id.guessInput);
@@ -73,7 +76,7 @@ public class GuessHintsActivity extends AppCompatActivity {
         // list of bitmaps for randomisation
         flagList = new ArrayList<>(flagBitmap.keySet());
 
-        showRandomFlag();
+        showRandomFlag();   // show random when activity starts
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,9 +88,10 @@ public class GuessHintsActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // if its the next flag, reset and show new flag
                 if (isNext) {
                     showRandomFlag();
-                    hintResultTxt.setText("");
+                    hintResultTxt.setText("");  // reset result text
                     isNext = false;
                 } else {
                     String userInput = guessInput.getText().toString().trim(); // .trim to remove unneeded space
@@ -102,6 +106,7 @@ public class GuessHintsActivity extends AppCompatActivity {
 
     }
 
+    // load bitmap of flag
     private Bitmap loadBitmap(int i) {
         return BitmapFactory.decodeResource(getResources(), i);
     }
@@ -128,6 +133,8 @@ public class GuessHintsActivity extends AppCompatActivity {
         dashes = new char[rightCountry.length()];
 
         int i = 0;
+
+        // while loop for creating dashes
         while (i < dashes.length) {
             if (rightCountry.charAt(i) == ' ') {
                 dashes[i] = ' ';   // leave the space as is
@@ -139,14 +146,17 @@ public class GuessHintsActivity extends AppCompatActivity {
         updateDash();   // update textview for dashes
     }
 
+    // updates dashes
     private void updateDash() {
         countryDashes.setText(new String(dashes));
     }
 
+    // checks if guessed letter is right, update dashes, change game state
     private void checkDashes(char guessedChar) {
         guessedChar = Character.toUpperCase(guessedChar);
         boolean found = false;
 
+        // loops through country names to check if guessed char is in name
         int i = 0;
         while (i < rightCountry.length()) {
             if (Character.toUpperCase(rightCountry.charAt(i)) == guessedChar) {
@@ -159,6 +169,7 @@ public class GuessHintsActivity extends AppCompatActivity {
         if (found) {
             updateDash();    // update if character is found
 
+            // if all letters are guessed right, change submit btn and result text
             if (new String(dashes).equals(rightCountry)) {
                 submitButton.setText("Next");
                 isNext = true;  // will load new flag on next click
@@ -168,6 +179,7 @@ public class GuessHintsActivity extends AppCompatActivity {
         } else {
             wrongGuess = wrongGuess + 1;
 
+            // if max wrong guesses are hit, change result txt, dashes and submit btn
             if (wrongGuess >= maxWrongGuess) {
                 hintResultTxt.setText("Wrong! The right country was: " + rightCountry);
                 hintResultTxt.setTextColor(Color.RED);
@@ -177,6 +189,7 @@ public class GuessHintsActivity extends AppCompatActivity {
             }
         }
 
+        // clear guess input each guess
         guessInput.setText("");
     }
 }

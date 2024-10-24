@@ -24,17 +24,19 @@ import java.util.Random;
 
 public class AdvancedLevelActivity extends AppCompatActivity {
 
+    // xml elements
     private ImageView flag1, flag2, flag3;
     private EditText flagOneName, flagTwoName, flagThreeName;
     private Button btnSubmit;
     private TextView scoreTextView, feedbackTextView;
 
-    private HashMap<Bitmap, String> flagBitmap;
-    private List<Bitmap> flagList;
-    private String[] rightCountryNames = new String[3];
-    private int tries = 0;
-    private int maxTries = 3;
-    private int score = 0;
+    // game data
+    private HashMap<Bitmap, String> flagBitmap;  // hasmap for storing flags/country names
+    private List<Bitmap> flagList;  // flag list
+    private String[] rightCountryNames = new String[3];  // stores right country names
+    private int tries = 0;  // tracks attempts
+    private int maxTries = 3;  // max attempts
+    private int score = 0;  // tracks player score
     private boolean isNextRound = false;   // tracks if we're waiting for next round
 
     @Override
@@ -56,7 +58,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         // initialises score
         scoreUpdate();
 
-
+        // initialises flagBitmap maps and loads flag images with names
         flagBitmap = new HashMap<>();
         flagBitmap.put(loadBitmap(R.drawable.algeria), "Algeria");
         flagBitmap.put(loadBitmap(R.drawable.australia), "Australia");
@@ -80,10 +82,11 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         flagBitmap.put(loadBitmap(R.drawable.ukraine), "Ukraine");
         flagBitmap.put(loadBitmap(R.drawable.zimbabwe), "Zimbabwe");
 
+        // initialises flag list
         flagList = new ArrayList<>(flagBitmap.keySet());
 
 
-        showRandomFlags();
+        showRandomFlags();  // shows random flags at start of game
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +103,13 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         });
     }
 
+    // loads bitmap images from resources
     private Bitmap loadBitmap(int i) {
 
         return BitmapFactory.decodeResource(getResources(), i);
     }
 
+    // shows 3 random flags
     private void showRandomFlags() {
         Random random = new Random();
         Bitmap randomFlag1 = flagList.get(random.nextInt(flagList.size()));
@@ -129,6 +134,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         rightCountryNames[2] = flagBitmap.get(randomFlag3);
     }
 
+    // checks answers
     private void checkAnswers() {
 
         if (isNextRound) {
@@ -136,6 +142,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
             return;
         }
 
+        // makes sure all inputs are filled
         if (flagOneName.getText().toString().trim().isEmpty() ||
             flagTwoName.getText().toString().trim().isEmpty() ||
             flagThreeName.getText().toString().trim().isEmpty()) {
@@ -197,6 +204,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         isNextRound = true;
     }
 
+    // resets UI for next round
     private void resetNextRound() {
 
         flagOneName.setEnabled(true);
@@ -219,6 +227,7 @@ public class AdvancedLevelActivity extends AppCompatActivity {
         isNextRound = false;
     }
 
+    // updates score
     private void scoreUpdate() {
         scoreTextView.setText("Score: " + score);
     }

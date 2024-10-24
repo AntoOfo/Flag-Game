@@ -23,15 +23,17 @@ import java.util.Random;
 
 public class GuessFlagActivity extends AppCompatActivity {
 
+    // xml elements
     private ImageView flagOne, flagTwo, flagThree;
     private TextView countryName;
     private TextView resultTxt;
     private Button nextBtn;
 
-    private HashMap<Bitmap, String> flagBitmap;
-    private List<Bitmap> flagList;
-    private String rightCountry;
-    private Bitmap rightFlag;
+    // game data
+    private HashMap<Bitmap, String> flagBitmap;  // map of flag bitmaps and names
+    private List<Bitmap> flagList;  // flag list
+    private String rightCountry;  // stores right country name
+    private Bitmap rightFlag;   // stores right flag for round
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class GuessFlagActivity extends AppCompatActivity {
         // list of bitmaps for randomisation
         flagList = new ArrayList<>(flagBitmap.keySet());
 
-        showRandomFlags();
+        showRandomFlags();   // shows random flags when game starts
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,18 +94,20 @@ public class GuessFlagActivity extends AppCompatActivity {
                 nextBtn.setVisibility(TextView.GONE);
                 resultTxt.setText("");
             }
-        });
-        }
+    });
+    }
+    // loads flag bitmap from resources
     private Bitmap loadBitmap(int i) {
         return BitmapFactory.decodeResource(getResources(), i);
     }
 
     private void showRandomFlags() {
         Random random = new Random();
-        // chooses 3 random flags
+        // chooses 2 random flags
         Bitmap randomFlag1 = flagList.get(random.nextInt(flagList.size()));
         Bitmap randomFlag2 = flagList.get(random.nextInt(flagList.size()));
 
+        // makes sure flags are all unique
         while (randomFlag2.equals(randomFlag1)) {
             randomFlag2 = flagList.get(random.nextInt(flagList.size()));
         }
@@ -114,16 +118,19 @@ public class GuessFlagActivity extends AppCompatActivity {
             randomFlag3 = flagList.get(random.nextInt(flagList.size()));
         }
 
+        // sets images for flags
         flagOne.setImageBitmap(randomFlag1);
         flagTwo.setImageBitmap(randomFlag2);
         flagThree.setImageBitmap(randomFlag3);
 
+        // randomly picks 1/3 flags as the right one
         Bitmap[] flags = {randomFlag1, randomFlag2, randomFlag3};
         rightFlag = flags[random.nextInt(3)];
         rightCountry = flagBitmap.get(rightFlag);
 
         countryName.setText(rightCountry);
 
+        // this is for onCLickListeners
         final Bitmap finalRandomFlag1 = randomFlag1;
         final Bitmap finalRandomFlag2 = randomFlag2;
         final Bitmap finalRandomFlag3 = randomFlag3;
@@ -151,6 +158,7 @@ public class GuessFlagActivity extends AppCompatActivity {
 
     }
 
+    // checks if chosen flag is the right one
     private void flagChoiceCheck(Bitmap chosenFlag) {
 
         if (chosenFlag == rightFlag) {
